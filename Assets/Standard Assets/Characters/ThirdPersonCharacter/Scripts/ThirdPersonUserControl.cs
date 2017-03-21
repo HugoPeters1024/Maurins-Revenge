@@ -46,8 +46,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void FixedUpdate()
         {
             // read inputs
-            float h = CrossPlatformInputManager.GetAxis("Horizontal");
-            float v = CrossPlatformInputManager.GetAxis("Vertical");
+            float h = 1;
+            float v = 0;
+            if (Input.GetKey(KeyCode.A))
+                v += 1f;
+            if (Input.GetKey(KeyCode.D))
+                v -= 1f;
             bool forward = Input.GetKey(KeyCode.W);
             bool crouch = Input.GetKey(KeyCode.C);
 
