@@ -15,7 +15,6 @@ public class Spawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print(player.transform.position.x);
 		if (player.transform.position.x > (count-2))
         {
             lastSpawn = Instantiate(prefab);
