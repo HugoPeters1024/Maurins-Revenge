@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Maurin's Revenge.unity
+  isLoaded: 1
+  isActive: 1

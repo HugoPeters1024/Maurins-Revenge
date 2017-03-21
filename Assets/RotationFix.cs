@@ -12,6 +12,6 @@ public class RotationFix : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.rotation = temp.rotation;
+        transform.rotation = new Quaternion();
 	}
 }
