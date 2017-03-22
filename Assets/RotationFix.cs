@@ -11,7 +11,7 @@ public class RotationFix : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.localPosition = new Vector3(player.transform.position.x-4, player.transform.position.y+2, transform.position.z);
+        transform.localPosition = new Vector3(player.transform.position.x-6f, player.transform.position.y+2, player.transform.position.z);
         print(player.transform.localPosition.x);
 	}
 }

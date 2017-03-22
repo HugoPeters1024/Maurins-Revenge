@@ -49,12 +49,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             count++;
             print(count);
             // read inputs
-            float h = 1f;
+            float h = 5f + (float)count/50f;
             float v = 0;
             if (Input.GetKey(KeyCode.A))
                 v += 1f;
             if (Input.GetKey(KeyCode.D))
                 v -= 1f;
+            v *= h;
             bool forward = Input.GetKey(KeyCode.W);
             bool crouch = Input.GetKey(KeyCode.C);
 

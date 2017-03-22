@@ -81,6 +81,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GameBehaviour.cs" />
     <Compile Include="Assets\RotationFix.cs" />
     <Compile Include="Assets\Score.cs" />
     <Compile Include="Assets\Scripts\Breed.cs" />
