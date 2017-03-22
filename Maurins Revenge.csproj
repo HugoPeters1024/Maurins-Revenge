@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\RotationFix.cs" />
+    <Compile Include="Assets\Score.cs" />
     <Compile Include="Assets\Scripts\Breed.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
   </ItemGroup>

@@ -12,10 +12,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-
+        int count;   //counter to constantly increment speed.
         
         private void Start()
         {
+            count = 0;
             // get the transform of the main camera
             if (Camera.main != null)
             {
@@ -45,8 +46,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         // Fixed update is called in sync with physics
         private void FixedUpdate()
         {
+            count++;
+            print(count);
             // read inputs
-            float h = 1;
+            float h = 1f;
             float v = 0;
             if (Input.GetKey(KeyCode.A))
                 v += 1f;
