@@ -20,6 +20,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 	        agent.updateRotation = false;
 	        agent.updatePosition = true;
+            Transform target = transform;
+            target.position += new Vector3(4, 0,0);
+            SetTarget(target);
         }
 
 

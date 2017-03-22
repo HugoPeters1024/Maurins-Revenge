@@ -46,10 +46,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		public void Move(Vector3 move, bool crouch, bool jump)
 		{
 
-			// convert the world relative moveInput vector into a local-relative
-			// turn amount and forward amount required to head in the desired
-			// direction.
-			//if (move.magnitude > 1f) move.Normalize();
+            // convert the world relative moveInput vector into a local-relative
+            // turn amount and forward amount required to head in the desired
+            // direction.
+			if (move.magnitude > 1f) move.Normalize();
             move *= (Mathf.Abs(move.x) + Mathf.Abs(move.y) + Mathf.Abs(move.z));
 			move = transform.InverseTransformDirection(move);
 			CheckGroundStatus();
@@ -149,7 +149,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			else
 			{
 				// don't use that while airborne
-				m_Animator.speed = 1;
+				m_Animator.speed = 1024;
 			}
 		}
 
