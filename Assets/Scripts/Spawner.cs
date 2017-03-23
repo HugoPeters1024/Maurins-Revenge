@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour {
     // Use this for initialization
     public GameObject prefab;
     public GameObject player;
-    public GameObject[] enemies;
+    public AbstractEnemy[] enemies;
     public int sightRange;
     Random random;
     GameObject lastSpawn;
@@ -22,7 +22,7 @@ public class Spawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (player.transform.position.x > (count-sightRange))
+		while (player.transform.position.x > (count-sightRange))
         {
             offset += Random.Range(0, 2f)-1f;
             lastSpawn = Instantiate(prefab);
@@ -34,15 +34,16 @@ public class Spawner : MonoBehaviour {
                 {
                     lastSpawn = Instantiate(prefab);
                     int zScale = Random.Range(1, 5);
-                    lastSpawn.transform.localPosition += new Vector3(count + i, 3, offset);
+                    lastSpawn.transform.localPosition += new Vector3(count + i, 4, offset);
                     lastSpawn.transform.localScale = new Vector3(1, 1, zScale);
                 }
             }
 
             if ((int)Random.Range(0, 6) == 0)
             {
-                lastSpawn = Instantiate(enemies[(int)Random.Range(0, enemies.GetLength(0))]);
-                lastSpawn.transform.localPosition += new Vector3(count, 1, (int)Random.Range(0, 3) + offset);
+                AbstractEnemy e = enemies[(int)Random.Range(0, enemies.GetLength(0))];
+                lastSpawn = Instantiate(e.gameObject);
+                lastSpawn.transform.localPosition = new Vector3(count, 1, (int)Random.Range(0, 3) + offset);
                 lastSpawn.transform.Rotate(0, 270, 0);
             }
             count++;
