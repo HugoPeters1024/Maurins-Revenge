@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Score : MonoBehaviour {
 
     int score;
-    public GameObject player;
+    public PlayerControls player;
 	// Use this for initialization
 	void Start () {
 		
@@ -26,5 +26,6 @@ public class Score : MonoBehaviour {
     private void OnGUI()
     {
         GUI.Box(new Rect(50, 50, Screen.width, Screen.height), "Score: " + ((int)player.transform.position.x).ToString(), GUIStyle.none);
+        GUI.Box(new Rect(50, 72, Screen.width, Screen.height), "Value: " + player.Value.ToString(), GUIStyle.none);
     }
 }

@@ -31,8 +31,15 @@ public class PlayerControls : MonoBehaviour {
         if (Input.GetKey(KeyCode.D))
             transform.position += new Vector3(0, 0, -0.07f);
 
-        value = (int)transform.rotation.eulerAngles.y/90 + 1;
-        print(CalcSideUp());
+        if (isGrounded)
+        {
+            int v = CalcSideUp();
+            if (v != 0 && v != value)
+            {
+                value = v;
+                GetComponent<Renderer>().material.color = new Color(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
+            }
+        }
 	}
 
     int CalcSideUp()
@@ -55,5 +62,10 @@ public class PlayerControls : MonoBehaviour {
     bool isGrounded
     {
         get { return GetComponent<Rigidbody>().velocity.y > -0.1f && GetComponent<Rigidbody>().velocity.y < 0.1f; }
+    }
+
+    public int Value
+    {
+        get { return value; }
     }
 }
