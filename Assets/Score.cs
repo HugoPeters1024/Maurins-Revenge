@@ -5,17 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour {
 
-    int score;
+    float bonus;
     public PlayerControls player;
 	// Use this for initialization
 	void Start () {
-		
+        bonus = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        score = (int)player.transform.position.x;
-
         //replay
         if (player.transform.position.y < -5)
         {
@@ -23,9 +21,21 @@ public class Score : MonoBehaviour {
         }
 	}
 
+    private void FixedUpdate()
+    {
+        if (player.Value == 3)
+            bonus+= 0.25f;
+    }
+
     private void OnGUI()
     {
-        GUI.Box(new Rect(50, 50, Screen.width, Screen.height), "Score: " + ((int)player.transform.position.x).ToString(), GUIStyle.none);
+        GUI.Box(new Rect(50, 50, Screen.width, Screen.height), "Score: " + ((int)GameScore).ToString(), GUIStyle.none);
         GUI.Box(new Rect(50, 72, Screen.width, Screen.height), "Value: " + player.Value.ToString(), GUIStyle.none);
     }
+
+    public float GameScore
+    {
+        get { return player.transform.position.x + bonus; }
+    }
 }
+

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AbstractEnemy : MonoBehaviour {
     public float movementSpeed;
+    public PlayerControls player;
 	// Use this for initialization
 	void Start () {
 	}
@@ -11,6 +12,6 @@ public class AbstractEnemy : MonoBehaviour {
     // Update is called once per frame
     private void Update()
     {
-        transform.position += new Vector3(-movementSpeed, 0, 0);
+        transform.position += new Vector3((player.Value == 4) ? 0.2f : -movementSpeed, 0, 0);
     }
 }

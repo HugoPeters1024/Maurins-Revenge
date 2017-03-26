@@ -1,14 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControls : MonoBehaviour {
 
     public float jumpForce;
+    public float m_speed;
     public float gravity;
     int distToGround;
     int count;
     int value;
+    /*
+     * 1 -> double speed
+     * 2 -> higher jump
+     * 3 -> score multiplier
+     * 4 -> immunity
+     * 5 -> decreased gravity
+     * 6 -> destroy blocks on contact
+    */
+    Color[] playerColor = new Color[6]
+    {
+        Color.blue,
+        Color.cyan,
+        Color.green,
+        Color.magenta,
+        Color.yellow,
+        Color.black
+    };
 
     // Use this for initialization
     void Start () {
@@ -20,16 +39,16 @@ public class PlayerControls : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            GetComponent<Rigidbody>().AddForce(new Vector3(0, jumpForce, 0));
-            Physics.gravity = new Vector3(0, -gravity, 0);
+            GetComponent<Rigidbody>().AddForce(new Vector3(0, (value == 2 ? jumpForce*1.5f : jumpForce), 0));
         }
 
         //forward motion
-        transform.position += new Vector3(0.1f + count++/60000f, 0, 0);
+        float speed = value == 1 ? m_speed * 2 : m_speed;
+        transform.position += new Vector3(speed + count++/60000f, 0, 0);
         if (Input.GetKey(KeyCode.A))
-            transform.position += new Vector3(0, 0, 0.07f);
+            transform.position += new Vector3(0, 0, speed);
         if (Input.GetKey(KeyCode.D))
-            transform.position += new Vector3(0, 0, -0.07f);
+            transform.position += new Vector3(0, 0, -speed);
 
         if (isGrounded)
         {
@@ -37,10 +56,30 @@ public class PlayerControls : MonoBehaviour {
             if (v != 0 && v != value)
             {
                 value = v;
-                GetComponent<Renderer>().material.color = new Color(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
+                GetComponent<Renderer>().material.color = playerColor[v-1];
             }
         }
-	}
+
+        //change gravity on 5
+        Physics.gravity = Value == 5 ? new Vector3(0, -gravity * 0.15f, 0) : new Vector3(0, -gravity, 0);
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch(collision.gameObject.name)
+        {
+            case "AbstractEnemy":
+                if (Value == 4)
+                    Destroy(collision.gameObject);
+                break;
+
+            case "Platform Layer":
+                if (Value == 6)
+                    Destroy(collision.gameObject);
+                break;
+        }
+    }
 
     int CalcSideUp()
     {
