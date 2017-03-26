@@ -13,5 +13,7 @@ public class AbstractEnemy : MonoBehaviour {
     private void Update()
     {
         transform.position += new Vector3((player.Value == 4) ? 0.2f : -movementSpeed, 0, 0);
+        if (transform.position.y < -5)
+            Destroy(gameObject);
     }
 }

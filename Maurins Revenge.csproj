@@ -85,6 +85,7 @@
     <Compile Include="Assets\CatEnemy.cs" />
     <Compile Include="Assets\Controls.cs" />
     <Compile Include="Assets\GameBehaviour.cs" />
+    <Compile Include="Assets\Platform.cs" />
     <Compile Include="Assets\PlayerControls.cs" />
     <Compile Include="Assets\RotationFix.cs" />
     <Compile Include="Assets\Score.cs" />

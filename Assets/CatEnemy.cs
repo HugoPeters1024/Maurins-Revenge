@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CatEnemy : AbstractEnemy {
 
-	// Use this for initialization
-	
-	// Update is called once per frame
+    // Use this for initialization
+
+    // Update is called once per frame
 }

@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class Breed : MonoBehaviour {
 
-    Transform self;
     public int iterations;
     protected int counter;
     public GameObject copy;
     bool beenCopied;
 	// Use this for initialization
 	void Start () {
-        self = this.GetComponent<Transform>();
         counter = GetComponentInParent<Breed>().counter;
         beenCopied = false;
     }

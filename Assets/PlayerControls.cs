@@ -8,7 +8,6 @@ public class PlayerControls : MonoBehaviour {
     public float jumpForce;
     public float m_speed;
     public float gravity;
-    int distToGround;
     int count;
     int value;
     /*
@@ -31,7 +30,6 @@ public class PlayerControls : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        distToGround = 0;
         count = 0;
     }
 
@@ -67,14 +65,14 @@ public class PlayerControls : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        switch(collision.gameObject.name)
+        switch (collision.gameObject.name)
         {
             case "AbstractEnemy":
                 if (Value == 4)
                     Destroy(collision.gameObject);
                 break;
 
-            case "Platform Layer":
+            case "PlatformLayer":
                 if (Value == 6)
                     Destroy(collision.gameObject);
                 break;

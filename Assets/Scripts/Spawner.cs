@@ -8,17 +8,14 @@ public class Spawner : MonoBehaviour {
     const int levelWidth = 5;
     
     // Use this for initialization
-    public GameObject prefab;
-    public GameObject player;
+    public Platform prefab;
+    public PlayerControls player;
     public AbstractEnemy[] enemies;
     public int sightRange;
-    Random random;
-    GameObject lastSpawn;
     int count;
     float offset;
 	void Start () {
         count = 0;
-        random = new Random();
         offset = 0;
 	}
 	
@@ -30,14 +27,27 @@ public class Spawner : MonoBehaviour {
             offset += Random.Range(0, 2f)-1f;
             for (int i = 0; i < levelWidth; ++i)
             {
-                lastSpawn = Instantiate(prefab);
+                Platform lastSpawn = Instantiate(prefab);
+                lastSpawn.gameObject.name = "BasePlatform";
+                lastSpawn.Player = player;
                 lastSpawn.transform.localPosition += new Vector3(count, 0, offset + i);
-                if (Random.Range(0, 4) == 0)
+                int z = Random.Range(0, 10);
+                switch(z)
                 {
-                    PhysicMaterial m = new PhysicMaterial();
-                    m.bounciness = 1;
-                    lastSpawn.GetComponent<BoxCollider>().material = m;
-                    lastSpawn.GetComponent<Renderer>().material.color = Color.red;
+                    case 0:
+                    case 1:
+                    case 2:
+                        PhysicMaterial m = new PhysicMaterial();
+                        m.bounciness = 1;
+                        lastSpawn.GetComponent<BoxCollider>().material = m;
+                        lastSpawn.GetComponent<Renderer>().material.color = Color.red;
+                        lastSpawn.Kind = 1;
+                        break;
+
+                    case 3:
+                        lastSpawn.GetComponent<Renderer>().material.color = Color.blue;
+                        lastSpawn.Kind = 2;
+                        break;
                 }
             }
 
@@ -49,8 +59,9 @@ public class Spawner : MonoBehaviour {
                     int z = Random.Range(1, 5);
                     for (int j = 0; j < z; ++j)
                     {
-                        lastSpawn = Instantiate(prefab);
-                        lastSpawn.gameObject.name = "Platform Layer";
+                        Platform lastSpawn = Instantiate(prefab);
+                        lastSpawn.Player = player;
+                        lastSpawn.gameObject.name = "PlatformLayer";
                         lastSpawn.transform.localPosition += new Vector3(count+i, 4, offset + j);
                     }
                 }
@@ -59,8 +70,9 @@ public class Spawner : MonoBehaviour {
             if ((int)Random.Range(0, 6) == 0)
             {
                 AbstractEnemy e = enemies[(int)Random.Range(0, enemies.GetLength(0))];
-                lastSpawn = Instantiate(e.gameObject);
+                AbstractEnemy lastSpawn = Instantiate(e);
                 lastSpawn.name = "AbstractEnemy";
+                lastSpawn.player = player;
                 lastSpawn.transform.localPosition = new Vector3(count, 1, (int)Random.Range(0, 3) + offset);
                 lastSpawn.transform.Rotate(0, 270, 0);
             }
