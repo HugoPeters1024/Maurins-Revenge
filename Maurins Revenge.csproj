@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AbstractEnemy.cs" />
+    <Compile Include="Assets\BallFlag.cs" />
     <Compile Include="Assets\CatEnemy.cs" />
     <Compile Include="Assets\Controls.cs" />
     <Compile Include="Assets\GameBehaviour.cs" />
