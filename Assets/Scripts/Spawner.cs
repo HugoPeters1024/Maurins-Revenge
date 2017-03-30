@@ -25,18 +25,16 @@ public class Spawner : MonoBehaviour {
 		while (player.transform.position.x > (count-sightRange))
         {
             offset += Random.Range(0, 2f)-1f;
-            for (int i = 0; i < levelWidth; ++i)
+            for (int i = 0; i < (count < 40 ? 20 : levelWidth); ++i)
             {
                 Platform lastSpawn = Instantiate(prefab);
                 lastSpawn.gameObject.name = "BasePlatform";
                 lastSpawn.Player = player;
-                lastSpawn.transform.localPosition += new Vector3(count, 0, offset + i);
+                lastSpawn.transform.localPosition += new Vector3(count -2, 0, offset + i);
                 int z = Random.Range(0, 10);
                 switch(z)
                 {
                     case 0:
-                    case 1:
-                    case 2:
                         PhysicMaterial m = new PhysicMaterial();
                         m.bounciness = 1;
                         lastSpawn.GetComponent<BoxCollider>().material = m;
@@ -44,9 +42,13 @@ public class Spawner : MonoBehaviour {
                         lastSpawn.Kind = 1;
                         break;
 
-                    case 3:
+                    case 1:
                         lastSpawn.GetComponent<Renderer>().material.color = Color.blue;
                         lastSpawn.Kind = 2;
+                        break;
+
+                    default:
+                        lastSpawn.GetComponent<Renderer>().material.color = new Color(22 / 255f, 119 / 255f, 58 /255f);
                         break;
                 }
             }

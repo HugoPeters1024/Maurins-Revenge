@@ -16,4 +16,9 @@ public class AbstractEnemy : MonoBehaviour {
         if (transform.position.y < -5)
             Destroy(gameObject);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+    }
 }

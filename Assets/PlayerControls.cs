@@ -8,6 +8,7 @@ public class PlayerControls : MonoBehaviour {
     public float jumpForce;
     public float m_speed;
     public float gravity;
+    QuitButton quitButton;
     int count;
     int value;
     /*
@@ -31,6 +32,8 @@ public class PlayerControls : MonoBehaviour {
     // Use this for initialization
     void Start () {
         count = 0;
+        transform.position = new Vector3(0, 2, 10);
+        quitButton = GetComponent<QuitButton>();
     }
 
     // Update is called once per frame
@@ -55,6 +58,10 @@ public class PlayerControls : MonoBehaviour {
             {
                 value = v;
                 GetComponent<Renderer>().material.color = playerColor[v-1];
+                if (value == 4)
+                {
+                    quitButton.nameStr = "";
+                }
             }
         }
 
@@ -68,8 +75,7 @@ public class PlayerControls : MonoBehaviour {
         switch (collision.gameObject.name)
         {
             case "AbstractEnemy":
-                if (Value == 4)
-                    Destroy(collision.gameObject);
+                SceneManager.LoadScene(1);
                 break;
 
             case "PlatformLayer":
