@@ -36,5 +36,10 @@ public class HighScoreScreen : MonoBehaviour {
         {
             SceneManager.LoadScene(0);
         }
+
+        if (GUI.Button(new Rect(Screen.width/2 - 50, 28, 100, 15), "Quit"))
+        {
+            Application.Quit();
+        }
     }
 }

@@ -25,7 +25,7 @@ public class Score : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //replay
-        if (player.transform.position.y < -5)
+        if (player.transform.position.y < -25)
         {
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             SceneManager.LoadScene(1);
